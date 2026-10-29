@@ -1,0 +1,109 @@
+package com.vit.result.controller;
+
+import com.vit.result.dto.SemesterResultDTO;
+import com.vit.result.dto.SemesterResultResponseDTO;
+import com.vit.result.service.SemesterResultService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/results")
+@CrossOrigin(origins = {"http://localhost:8082", "http://localhost:5500", "http://localhost:3000", "http://127.0.0.1:8082", "http://127.0.0.1:5500"})
+public class ResultController {
+
+    @Autowired
+    private SemesterResultService semesterResultService;
+
+    /**
+     * POST /api/results - Save a new semester result
+     */
+    @PostMapping
+    public ResponseEntity<?> saveResult(@RequestBody SemesterResultDTO dto) {
+        try {
+            SemesterResultResponseDTO result = semesterResultService.saveResult(dto);
+            return new ResponseEntity<>(result, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", e.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Failed to save result: " + e.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * GET /api/results - Get all results
+     */
+    @GetMapping
+    public ResponseEntity<List<SemesterResultResponseDTO>> getAllResults() {
+        try {
+            List<SemesterResultResponseDTO> results = semesterResultService.getAllResults();
+            return new ResponseEntity<>(results, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * GET /api/results/{id} - Get result by ID
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getResultById(@PathVariable Long id) {
+        try {
+            SemesterResultResponseDTO result = semesterResultService.getResultById(id);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", e.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Failed to retrieve result: " + e.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * GET /api/results/student/{studentName} - Get results by student name
+     */
+    @GetMapping("/student/{studentName}")
+    public ResponseEntity<List<SemesterResultResponseDTO>> getResultsByStudentName(@PathVariable String studentName) {
+        try {
+            List<SemesterResultResponseDTO> results = semesterResultService.getResultsByStudentName(studentName);
+            return new ResponseEntity<>(results, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * GET /api/results/prn/{prn} - Get results by PRN
+     */
+    @GetMapping("/prn/{prn}")
+    public ResponseEntity<List<SemesterResultResponseDTO>> getResultsByPrn(@PathVariable String prn) {
+        try {
+            List<SemesterResultResponseDTO> results = semesterResultService.getResultsByPrn(prn);
+            return new ResponseEntity<>(results, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Health check endpoint
+     */
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "UP");
+        response.put("message", "VIT Result System API is running");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+}

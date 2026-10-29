@@ -1,0 +1,44 @@
+{
+    "Asgn5_SpringBoot_Result_System":  {
+                                           "Port":  8082,
+                                           "PID":  7720,
+                                           "StartTime":  "2026-10-29 18:57:02",
+                                           "LogFile":  "D:\\sem5\\WT\\WT_Assignments_All\\logs\\asgn5_result_system.log"
+                                       },
+    "Asgn4_React_Result_System":  {
+                                      "Port":  5174,
+                                      "PID":  20508,
+                                      "StartTime":  "2026-10-29 18:57:01",
+                                      "LogFile":  "D:\\sem5\\WT\\WT_Assignments_All\\logs\\asgn4_result_system.log"
+                                  },
+    "Asgn7_SpringBoot_Book_Store_Backend":  {
+                                                "Port":  8080,
+                                                "PID":  31776,
+                                                "StartTime":  "2026-10-29 18:57:04",
+                                                "LogFile":  "D:\\sem5\\WT\\WT_Assignments_All\\logs\\asgn7_backend.log"
+                                            },
+    "Asgn6_Node_Online_Book_Store":  {
+                                         "Port":  8081,
+                                         "PID":  31180,
+                                         "StartTime":  "2026-10-29 18:57:03",
+                                         "LogFile":  "D:\\sem5\\WT\\WT_Assignments_All\\logs\\asgn6_bookstore.log"
+                                     },
+    "Asgn2_React_World_Clock":  {
+                                    "Port":  5173,
+                                    "PID":  27608,
+                                    "StartTime":  "2026-10-29 18:56:59",
+                                    "LogFile":  "D:\\sem5\\WT\\WT_Assignments_All\\logs\\asgn2_world_clock.log"
+                                },
+    "Asgn7_React_Book_Store_Frontend":  {
+                                            "Port":  5175,
+                                            "PID":  32232,
+                                            "StartTime":  "2026-10-29 18:57:04",
+                                            "LogFile":  "D:\\sem5\\WT\\WT_Assignments_All\\logs\\asgn7_frontend.log"
+                                        },
+    "Asgn3_Tomcat_Servlet":  {
+                                 "Port":  8083,
+                                 "PID":  31572,
+                                 "StartTime":  "2026-10-29 18:57:00",
+                                 "LogFile":  "D:\\sem5\\WT\\WT_Assignments_All\\logs\\asgn3_tomcat.log"
+                             }
+}

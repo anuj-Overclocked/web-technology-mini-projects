@@ -1,0 +1,10 @@
+com\vit\result\controller\ResultController.class
+com\vit\result\dto\SemesterResultDTO.class
+com\vit\result\repository\SemesterResultRepository.class
+com\vit\result\dto\SemesterResultResponseDTO.class
+com\vit\result\entity\SemesterResult.class
+com\vit\result\ResultApplication.class
+com\vit\result\entity\SubjectResult.class
+com\vit\result\service\SemesterResultService.class
+com\vit\result\dto\SubjectDTO.class
+com\vit\result\ResultApplication$1.class

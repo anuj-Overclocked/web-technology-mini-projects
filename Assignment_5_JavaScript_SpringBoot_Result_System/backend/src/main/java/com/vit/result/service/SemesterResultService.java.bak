@@ -1,0 +1,161 @@
+package com.vit.result.service;
+
+import com.vit.result.dto.SemesterResultDTO;
+import com.vit.result.dto.SemesterResultResponseDTO;
+import com.vit.result.entity.SemesterResult;
+import com.vit.result.entity.SubjectResult;
+import com.vit.result.repository.SemesterResultRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+public class SemesterResultService {
+
+    @Autowired
+    private SemesterResultRepository semesterResultRepository;
+
+    /**
+     * Save a semester result
+     */
+    public SemesterResultResponseDTO saveResult(SemesterResultDTO dto) {
+        // Validate input
+        validateSemesterResult(dto);
+
+        // Create entity
+        SemesterResult result = new SemesterResult();
+        result.setStudentName(dto.getStudentName());
+        result.setPrn(dto.getPrn());
+        result.setDivision(dto.getDivision());
+        result.setTotalMarks(dto.getTotalMarks());
+        result.setPercentage(Double.parseDouble(dto.getPercentage()));
+        result.setResultStatus(dto.getResultStatus());
+
+        // Create subject results
+        List<SubjectResult> subjects = new ArrayList<>();
+        for (var subjectDto : dto.getSubjects()) {
+            SubjectResult subject = new SubjectResult();
+            subject.setSubjectName(subjectDto.getSubjectName());
+            subject.setMse(subjectDto.getMse());
+            subject.setEse(subjectDto.getEse());
+            subject.setTotal(subjectDto.getTotal());
+            subject.setGrade(subjectDto.getGrade());
+            subject.setSemesterResult(result);
+            subjects.add(subject);
+        }
+        result.setSubjects(subjects);
+
+        // Save to database
+        SemesterResult saved = semesterResultRepository.save(result);
+
+        return convertToResponseDTO(saved);
+    }
+
+    /**
+     * Get all results
+     */
+    public List<SemesterResultResponseDTO> getAllResults() {
+        return semesterResultRepository.findAll()
+                .stream()
+                .map(this::convertToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get result by ID
+     */
+    public SemesterResultResponseDTO getResultById(Long id) {
+        Optional<SemesterResult> result = semesterResultRepository.findById(id);
+        if (result.isPresent()) {
+            return convertToResponseDTO(result.get());
+        }
+        throw new RuntimeException("Result not found with ID: " + id);
+    }
+
+    /**
+     * Get results by student name
+     */
+    public List<SemesterResultResponseDTO> getResultsByStudentName(String studentName) {
+        return semesterResultRepository.findByStudentName(studentName)
+                .stream()
+                .map(this::convertToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get results by PRN
+     */
+    public List<SemesterResultResponseDTO> getResultsByPrn(String prn) {
+        return semesterResultRepository.findByPrn(prn)
+                .stream()
+                .map(this::convertToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Validate semester result data
+     */
+    private void validateSemesterResult(SemesterResultDTO dto) {
+        if (dto.getStudentName() == null || dto.getStudentName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Student name cannot be empty");
+        }
+        if (dto.getPrn() == null || dto.getPrn().trim().isEmpty()) {
+            throw new IllegalArgumentException("PRN cannot be empty");
+        }
+        if (dto.getDivision() == null || dto.getDivision().trim().isEmpty()) {
+            throw new IllegalArgumentException("Division cannot be empty");
+        }
+        if (dto.getSubjects() == null || dto.getSubjects().size() != 4) {
+            throw new IllegalArgumentException("Exactly 4 subjects are required");
+        }
+
+        // Validate each subject
+        for (var subject : dto.getSubjects()) {
+            if (subject.getMse() < 0 || subject.getMse() > 30) {
+                throw new IllegalArgumentException("Invalid MSE marks for " + subject.getSubjectName());
+            }
+            if (subject.getEse() < 0 || subject.getEse() > 70) {
+                throw new IllegalArgumentException("Invalid ESE marks for " + subject.getSubjectName());
+            }
+            if (subject.getTotal() != (subject.getMse() + subject.getEse())) {
+                throw new IllegalArgumentException("Total calculation mismatch for " + subject.getSubjectName());
+            }
+        }
+    }
+
+    /**
+     * Convert entity to response DTO
+     */
+    private SemesterResultResponseDTO convertToResponseDTO(SemesterResult entity) {
+        SemesterResultResponseDTO dto = new SemesterResultResponseDTO();
+        dto.setId(entity.getId());
+        dto.setStudentName(entity.getStudentName());
+        dto.setPrn(entity.getPrn());
+        dto.setDivision(entity.getDivision());
+        dto.setTotalMarks(entity.getTotalMarks());
+        dto.setPercentage(entity.getPercentage());
+        dto.setResultStatus(entity.getResultStatus());
+        dto.setCreatedAt(entity.getCreatedAt());
+
+        // Convert subjects
+        if (entity.getSubjects() != null) {
+            dto.setSubjects(
+                    entity.getSubjects().stream()
+                            .map(s -> new com.vit.result.dto.SubjectDTO(
+                                    s.getSubjectName(),
+                                    s.getMse(),
+                                    s.getEse(),
+                                    s.getTotal(),
+                                    s.getGrade()
+                            ))
+                            .collect(Collectors.toList())
+            );
+        }
+
+        return dto;
+    }
+}

@@ -1,0 +1,6 @@
+
+> bookhub-backend@1.0.0 start
+> node server.js
+
+BOOKHUB server running at http://localhost:8081
+MySQL database connected.

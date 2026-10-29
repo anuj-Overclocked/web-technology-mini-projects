@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build output
+**/dist/
+**/build/
+**/target/
+**/out/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Logs and runtime files
+logs/
+*.log
+.running_pids.json
+
+# Java and IDE files
+.classpath
+.project
+.settings/
+.idea/
+.vscode/
+*.class
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local caches
+.npm/
+.mvn/wrapper/maven-wrapper.jar

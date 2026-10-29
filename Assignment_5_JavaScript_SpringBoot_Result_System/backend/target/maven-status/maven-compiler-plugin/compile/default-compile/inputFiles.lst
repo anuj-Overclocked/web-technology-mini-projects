@@ -1,0 +1,9 @@
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\entity\SubjectResult.java
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\dto\SubjectDTO.java
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\service\SemesterResultService.java
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\controller\ResultController.java
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\entity\SemesterResult.java
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\repository\SemesterResultRepository.java
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\dto\SemesterResultDTO.java
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\dto\SemesterResultResponseDTO.java
+D:\sem5\WT\WT_Assignments_All\Assignment_5_JavaScript_SpringBoot_Result_System\backend\src\main\java\com\vit\result\ResultApplication.java

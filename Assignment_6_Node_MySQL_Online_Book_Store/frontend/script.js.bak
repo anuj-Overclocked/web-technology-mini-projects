@@ -1,0 +1,13 @@
+const API_BASE_URL = window.location.origin;
+
+function setupMobileMenu() {
+  const toggle = document.querySelector('.menu-toggle');
+  const links = document.querySelector('.nav-links');
+  if (!toggle || !links) return;
+  toggle.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+}
+
+document.addEventListener('DOMContentLoaded', setupMobileMenu);

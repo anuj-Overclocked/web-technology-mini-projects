@@ -1,0 +1,25 @@
+# Server Configuration
+server.port=8080
+server.servlet.context-path=/
+
+# Use H2 Database (In-Memory) for Development
+spring.datasource.url=jdbc:h2:mem:vit_result_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+# H2 Console (Optional - access at http://localhost:8080/h2-console)
+spring.h2.console.enabled=false
+
+# JPA/Hibernate Configuration
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.format_sql=true
+
+# Application Name
+spring.application.name=vit-result-system
+
+# Logging
+logging.level.root=INFO
+logging.level.com.vit.result=DEBUG

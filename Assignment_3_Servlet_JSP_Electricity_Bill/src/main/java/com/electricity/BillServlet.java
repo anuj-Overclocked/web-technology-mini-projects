@@ -1,0 +1,49 @@
+package com.electricity;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+@WebServlet("/calculate")
+public class BillServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String unitsStr = request.getParameter("units");
+        double units = 0;
+        try {
+            units = Double.parseDouble(unitsStr);
+        } catch (NumberFormatException e) {
+            response.sendRedirect("index.jsp");
+            return;
+        }
+
+        double bill;
+
+        if (units <= 50) {
+            bill = units * 3.50;
+        } else if (units <= 150) {
+            bill = (50 * 3.50) + ((units - 50) * 4.00);
+        } else if (units <= 250) {
+            bill = (50 * 3.50) + (100 * 4.00) + ((units - 150) * 5.20);
+        } else {
+            bill = (50 * 3.50) + (100 * 4.00) + (100 * 5.20) + ((units - 250) * 6.50);
+        }
+
+        request.setAttribute("units", units);
+        request.setAttribute("bill", String.format("%.2f", bill));
+
+        request.getRequestDispatcher("result.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect("index.jsp");
+    }
+}

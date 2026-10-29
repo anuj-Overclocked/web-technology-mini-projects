@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIT Student Result Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">VIT <span>RESULT</span></div>
+
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#result">Calculate Result</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HOME -->
+        <section id="home" class="hero">
+            <div class="container hero-content">
+
+                <div>
+                    <p class="tag">VISHWAKARMA INSTITUTE OF TECHNOLOGY</p>
+
+                    <h1>
+                        Student Semester
+                        <span>Result Portal</span>
+                    </h1>
+
+                    <p class="description">
+                        Enter your MSE and ESE marks for four subjects
+                        and calculate your semester result instantly.
+                    </p>
+
+                    <a href="#result" class="primary-btn">
+                        Calculate Result →
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- RESULT FORM -->
+        <section id="result" class="result-section">
+
+            <div class="container">
+
+                <div class="section-title">
+                    <p>SEMESTER RESULT</p>
+                    <h2>Enter Student Details</h2>
+                </div>
+
+                <form id="resultForm">
+
+                    <div class="student-details">
+
+                        <div class="input-group">
+                            <label>Student Name</label>
+                            <input
+                                type="text"
+                                id="studentName"
+                                placeholder="Enter student name"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label>PRN</label>
+                            <input
+                                type="text"
+                                id="prn"
+                                placeholder="Enter PRN"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label>Class / Division</label>
+                            <input
+                                type="text"
+                                id="division"
+                                placeholder="Example: TE-A"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <h3 class="subjects-title">Subject Marks</h3>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>MSE<br>(30)</th>
+                                    <th>ESE<br>(70)</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Web Technology</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="mse"
+                                            min="0"
+                                            max="30"
+                                            required
+                                        >
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="ese"
+                                            min="0"
+                                            max="70"
+                                            required
+                                        >
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Design & Analysis of Algorithms</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="mse"
+                                            min="0"
+                                            max="30"
+                                            required
+                                        >
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="ese"
+                                            min="0"
+                                            max="70"
+                                            required
+                                        >
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Computer Networks</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="mse"
+                                            min="0"
+                                            max="30"
+                                            required
+                                        >
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="ese"
+                                            min="0"
+                                            max="70"
+                                            required
+                                        >
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Ethical Hacking</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="mse"
+                                            min="0"
+                                            max="30"
+                                            required
+                                        >
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="ese"
+                                            min="0"
+                                            max="70"
+                                            required
+                                        >
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <button type="submit" class="calculate-btn">
+                        Generate Result
+                    </button>
+
+                </form>
+
+
+                <!-- RESULT OUTPUT -->
+
+                <div id="resultOutput" class="result-output">
+
+                    <div class="result-header">
+                        <p>VISHWAKARMA INSTITUTE OF TECHNOLOGY</p>
+                        <h2>SEMESTER RESULT</h2>
+                    </div>
+
+                    <div class="student-result-info">
+                        <p><strong>Name:</strong> <span id="displayName"></span></p>
+                        <p><strong>PRN:</strong> <span id="displayPrn"></span></p>
+                        <p><strong>Division:</strong> <span id="displayDivision"></span></p>
+                    </div>
+
+                    <div class="result-table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>MSE</th>
+                                    <th>ESE</th>
+                                    <th>Total</th>
+                                    <th>Grade</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="resultTableBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="result-summary">
+
+                        <div>
+                            <span>Total Marks</span>
+                            <strong id="totalMarks">0</strong>
+                        </div>
+
+                        <div>
+                            <span>Percentage</span>
+                            <strong id="percentage">0%</strong>
+                        </div>
+
+                        <div>
+                            <span>Result</span>
+                            <strong id="resultStatus">-</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>VIT Student Semester Result Management System</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
