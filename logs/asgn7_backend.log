@@ -83,3 +83,33 @@ Hibernate:
         b1_0.title 
     from
         books b1_0
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.category,
+        b1_0.image_url,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.category,
+        b1_0.image_url,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.category,
+        b1_0.image_url,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0
